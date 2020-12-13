@@ -1,12 +1,32 @@
 using NUnit.Framework;
+using System;
+using System.Collections;
 
 namespace Tests
 {
     public class Tests
     {
-        [SetUp]
-        public void Setup()
+        [TestCaseSource(nameof(MaxSumTestCases))]
+        public void BinTreeManager_gets_maxSum(int[][] binTree, int expectedResult)
         {
+            // Arrange
+            var binTreeManager = new BinTreeService();
+
+            // Act
+            var result = binTreeManager.GetMaxSum(binTree);
+
+            // Assert
+            Assert.IsTrue(expectedResult == result, $"Expected: {expectedResult}, but was: {result}.");
+        }
+
+        [Test]
+        public void BinTreeManager_GetMaxSum_ThrowsException_WhenEmptyDataProvided()
+        {
+            // Arrange
+            var binTreeManager = new BinTreeService();
+
+            // Assert
+            Assert.That(() => binTreeManager.GetMaxSum(new int[][] { }), Throws.TypeOf<ArgumentException>());
         }
 
         [TestCase(0, 1, ExpectedResult = true)]
@@ -21,36 +41,11 @@ namespace Tests
         [TestCase(10, 20, ExpectedResult = false)]
         public bool BinTree_CanValueContinuePath(int currentValue, int nextValue)
         {
-            // Arrange
-            var binTree = new BinTreeManager();
-
-            // Act
-            var result = binTree.CanValueContinuePath(currentValue, nextValue);
-
-            // Assert
-            return result;
+            return Extensions.ConformToEvensOddsSequence(currentValue, nextValue);
         }
 
-
-        [TestCaseSource(nameof(MaxSumTestCases))]
-        public void BinTreeManager_gets_maxSum(int[][] binTree, int expectedResult)
+        static readonly object[] MaxSumTestCases =
         {
-            // Arrange
-            var binTreeManager = new BinTreeManager();
-
-            // Act
-            var result = binTreeManager.GetMaxSum(binTree);
-
-            // Assert
-            Assert.IsTrue(expectedResult == result, $"Expected: {expectedResult}, but was: {result}.");
-        }
-
-        static object[] MaxSumTestCases =
-        {
-            new object[] {
-                new int[][] {},
-                -1 // no paths (empty input)
-            },
             new object[] {
                 new int[][]
                 {
@@ -126,6 +121,19 @@ namespace Tests
                     new []{ 1,5,4,5,2,8 },
                 },
                 31 // random case
+            },
+            new object[] {
+                new int[][]
+                {
+                    new []{       7       },
+                    new []{      2,2      },
+                    new []{     5,5,5     },
+                    new []{    4,4,4,4    },
+                    new []{   1,1,1,1,1   },
+                    new []{  0,0,0,0,0,0  },
+                    new []{ 1,1,1,1,1,1,1 },
+                },
+                20 // mulltiple even sums
             }
         };
     }
