@@ -39,7 +39,7 @@ namespace Tests
         [TestCase(1, 11, ExpectedResult = false)]
         [TestCase(10, 10, ExpectedResult = false)]
         [TestCase(10, 20, ExpectedResult = false)]
-        public bool BinTree_CanValueContinuePath(int currentValue, int nextValue)
+        public bool Extensions_ConformToEvensOddsSequence(int currentValue, int nextValue)
         {
             return Extensions.ConformToEvensOddsSequence(currentValue, nextValue);
         }
