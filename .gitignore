@@ -1,0 +1,54 @@
+#Ignore thumbnails created by Windows
+Thumbs.db
+#Ignore files built by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+.vs/
+#Nuget packages folder
+packages/
+node_modules/
+app/
+**/src/bower_modules/
+**/src/components/**/*.js
+**/src/components/**/*.map
+**/src/deprecated/**/*.js
+**/src/deprecated/**/*.map
+**/src/dms/**/*.js
+**/src/dms/**/*.map
+**/src/models/**/*.js
+**/src/models/**/*.map
+**/src/utils/**/*.js
+**/src/utils/**/*.map
+**/test/**/*.js
+**/test/**/*.map
+package-lock.json
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rptproj.rsuser
