@@ -29,6 +29,7 @@ namespace Tests
         {
             currentPath.Add(_data[i][j]);
 
+            // if bottom is reached, add currentPath to ValidPaths
             if (currentPath.Count == _data.Length)
                 ValidPaths.Add(currentPath);
 
