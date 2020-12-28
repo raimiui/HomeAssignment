@@ -1,47 +1,27 @@
 using NUnit.Framework;
 using System;
-using System.Collections;
 
 namespace Tests
 {
     public class Tests
     {
         [TestCaseSource(nameof(MaxSumTestCases))]
-        public void BinTreeManager_gets_maxSum(int[][] binTree, int expectedResult)
+        public void BinTreeManager_gets_maxSum(int[][] data, int expectedResult)
         {
-            // Arrange
-            var binTreeManager = new BinTreeService();
+            var result = new BinaryTree(data).MaxSum;
+            Assert.IsTrue(result == expectedResult, $"Expected: {expectedResult}, but was: {result}.");
+        }
 
-            // Act
-            var result = binTreeManager.GetMaxSum(binTree);
-
-            // Assert
-            Assert.IsTrue(expectedResult == result, $"Expected: {expectedResult}, but was: {result}.");
+        [Test]
+        public void BinTreeManager_GetMaxSum_ThrowsException_WhenNullDataProvided()
+        {
+            Assert.That(() => new BinaryTree(null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
         public void BinTreeManager_GetMaxSum_ThrowsException_WhenEmptyDataProvided()
         {
-            // Arrange
-            var binTreeManager = new BinTreeService();
-
-            // Assert
-            Assert.That(() => binTreeManager.GetMaxSum(new int[][] { }), Throws.TypeOf<ArgumentException>());
-        }
-
-        [TestCase(0, 1, ExpectedResult = true)]
-        [TestCase(1, 0, ExpectedResult = true)]
-        [TestCase(1, 2, ExpectedResult = true)]
-        [TestCase(2, 1, ExpectedResult = true)]
-        [TestCase(7, 10, ExpectedResult = true)]
-        [TestCase(10, 7, ExpectedResult = true)]
-        [TestCase(1, 1, ExpectedResult = false)]
-        [TestCase(1, 11, ExpectedResult = false)]
-        [TestCase(10, 10, ExpectedResult = false)]
-        [TestCase(10, 20, ExpectedResult = false)]
-        public bool Extensions_ConformToEvensOddsSequence(int currentValue, int nextValue)
-        {
-            return Extensions.ConformToEvensOddsSequence(currentValue, nextValue);
+            Assert.That(() => new BinaryTree(new int[][] { }), Throws.TypeOf<ArgumentException>());
         }
 
         static readonly object[] MaxSumTestCases =
